@@ -9,7 +9,6 @@
             </section>
             <section
                 v-if="isShowingCustomInputs"
-                v-scrollable
                 class="overlay centered"
             >
                 <custom-input-popup />

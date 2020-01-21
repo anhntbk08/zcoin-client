@@ -147,7 +147,7 @@ export default {
             tableFields,
             filter: '',
             totalSelected: 0,
-            selectedTx: []
+            selectedTx: {}
         }
     },
     computed: {
@@ -207,7 +207,7 @@ export default {
             // get selected utxos
             const utxos = [];
             this.tableData.forEach(element => {
-                if (this.selectedTx[element.txId]) {
+                if (this.selectedTx[element.uniqId]) {
                     utxos.push(element)
                 }
             });
@@ -254,12 +254,12 @@ export default {
         toggleAllCheckbox(isChecked) {
             if (!isChecked) {
                 this.totalSelected = 0;
-                this.selectedTx = [];
+                this.selectedTx = {};
             } else {
                 let sum = 0;
                 this.tableData.forEach(element => {
                     sum += element.amount;
-                    this.selectedTx[element.txId] = true;
+                    this.selectedTx[element.uniqId] = true;
                 });
                 this.totalSelected = sum;
             }
@@ -267,10 +267,10 @@ export default {
         convertToCoin: convertToCoin,
         toggleCheckbox(isCheck, dataItem) {
             if (!isCheck) {
-                this.selectedTx[dataItem.txId] = false;
+                this.selectedTx[dataItem.uniqId] = false;
                 this.totalSelected -= dataItem.amount
             } else {
-                this.selectedTx[dataItem.txId] = true;
+                this.selectedTx[dataItem.uniqId] = true;
                 this.totalSelected += dataItem.amount
             }
         },
@@ -290,7 +290,7 @@ export default {
         right: 20px;
         padding: 20px;
         background: #fff;
-        
+        overflow: auto;
         .close{
             position: absolute;
             top: 15px;
