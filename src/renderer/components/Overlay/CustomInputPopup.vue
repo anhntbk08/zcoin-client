@@ -13,7 +13,6 @@
             :fields="tableFields"
             :data-manager="dataManager"
             :track-by="trackBy"
-            @vuetable:checkbox-toggled-all="toggleAllCheckbox"
             @vuetable:checkbox-toggled-custom="toggleCheckbox"
         >
             <div
@@ -121,7 +120,7 @@ export default {
     props: {
         trackBy: {
             type: String,
-            default: 'txIndex'
+            default: 'uniqId'
         },
         sortOrder: {
             type: Array,
@@ -157,7 +156,6 @@ export default {
 
         tableData () {
             const tableData = [];
-
             for (const [id, tx] of Object.entries(this.transactions)) {
                 if (!['mined', 'receive', 'znode'].includes(tx.category)) {
                     continue;
