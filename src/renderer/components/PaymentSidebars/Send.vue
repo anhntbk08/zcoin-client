@@ -93,7 +93,11 @@
                                     </div>
                                 </div>
                                 <div class="control">
-                                    <u><a @click="selectCustomInputs()"> Select Custom Inputs</a></u>
+                                    <u><a
+                                        :style="{ cursor: 'default'}"
+                                        @click="selectCustomInputs()"
+                                    >
+                                        Select Custom Inputs</a></u>
                                 </div>
                                 <div class="subtract-fee-from-amount-checkbox">
                                     <input
@@ -628,8 +632,8 @@ export default {
         },
 
         selectCustomInputs() {
-            console.log("Start custom inputs popup")
             // show popup
+            this.$store.dispatch('ZcoinPayment/TOGGLE_CUSTOM_INPUTS_POPUP');
         }
     }
 }
